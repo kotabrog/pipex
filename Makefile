@@ -1,7 +1,10 @@
 SRCDIR	= ./srcs/
 SRCNAME	=	main.c\
+			pipe.c\
+			execve.c\
 			command.c\
 			status.c\
+			ft_close.c\
 			ft_malloc.c\
 			utility1.c\
 			mini_libft1.c\

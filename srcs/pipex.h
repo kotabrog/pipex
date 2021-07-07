@@ -6,7 +6,7 @@
 /*   By: ksuzuki <ksuzuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 22:40:26 by ksuzuki           #+#    #+#             */
-/*   Updated: 2021/07/07 00:29:26 by ksuzuki          ###   ########.fr       */
+/*   Updated: 2021/07/07 23:50:33 by ksuzuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 
 # include <stdio.h>
 
@@ -22,11 +23,13 @@
 # define FALSE 0
 # define SUCCESS 0
 # define ERROR -1
+# define READ 0
+# define WRITE 1
 
 typedef struct s_cmd {
 	char	*cmd;
 	int		pipefd[2];
-	int		fd;
+	int		pid;
 }			t_cmd;
 
 typedef struct s_status {
@@ -37,11 +40,17 @@ typedef struct s_status {
 	char	**env;
 }			t_status;
 
+int		process_pipe(t_status *status);
+int		process_command(t_status *status, t_cmd *cmd, t_cmd *next_cmd);
+
 int		status_init(int argc, char **argv, char ***env, t_status **status);
 int		status_free(t_status *status);
 
 int		cmd_init(char **argv, t_cmd **cmd);
 int		cmd_free(t_cmd ***cmd);
+
+int		ft_close(int *fd);
+int		multi_close(int *fd1, int *fd2, int *fd3, int *fd4);
 
 int		ft_malloc(void *pointer, size_t type_size, size_t n);
 int		ft_free(void *pointer);
