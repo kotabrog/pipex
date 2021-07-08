@@ -6,7 +6,7 @@
 /*   By: ksuzuki <ksuzuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 22:40:26 by ksuzuki           #+#    #+#             */
-/*   Updated: 2021/07/08 18:38:11 by ksuzuki          ###   ########.fr       */
+/*   Updated: 2021/07/08 20:22:44 by ksuzuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 # include <stdio.h>
 
@@ -41,7 +42,8 @@ typedef struct s_status {
 }			t_status;
 
 int		process_pipe(t_status *status);
-int		process_command(t_status *status, t_cmd *cmd, t_cmd *next_cmd);
+void	process_command(t_status *status, t_cmd *cmd, t_cmd *next_cmd);
+int		search_execve(char **com, char **env);
 
 int		status_init(int argc, char **argv, char ***env, t_status **status);
 int		status_free(t_status *status);
@@ -54,6 +56,7 @@ int		multi_close(int *fd1, int *fd2, int *fd3, int *fd4);
 
 int		ft_malloc(void *pointer, size_t type_size, size_t n);
 int		ft_free(void *pointer);
+int		ft_free_double_char(char ***pointer);
 
 int		ft_strcmp(const char *s1, const char *s2);
 void	ft_strcpy(char *p, const char *s, size_t n);
@@ -63,7 +66,9 @@ size_t	ft_strlen(const char *c);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_strdup(const char *s);
+char	*ft_strjoin(const char *s1, const char *s2);
 char	**ft_split(const char *s, char c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void	debug_status(t_status *status);
 

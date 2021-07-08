@@ -6,13 +6,20 @@
 /*   By: ksuzuki <ksuzuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 22:24:18 by ksuzuki           #+#    #+#             */
-/*   Updated: 2021/07/08 18:47:15 by ksuzuki          ###   ########.fr       */
+/*   Updated: 2021/07/08 20:22:37 by ksuzuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	process_command(t_status *status, t_cmd *cmd, t_cmd *next_cmd)
+static void	command_error(char *cmd)
+{
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd(": command could not be executed.", 2);
+	exit(EXIT_FAILURE);
+}
+
+void	process_command(t_status *status, t_cmd *cmd, t_cmd *next_cmd)
 {
 	char	**arg;
 	int		flag;
@@ -33,6 +40,6 @@ int	process_command(t_status *status, t_cmd *cmd, t_cmd *next_cmd)
 		flag = ERROR;
 	multi_close(&(cmd->pipefd[READ]), &(cmd->pipefd[WRITE]), NULL, NULL);
 	if (!flag)
-		execve(arg[0], arg, status->env);
-	exit(EXIT_FAILURE);
+		search_execve(arg, status->env);
+	command_error(arg[0]);
 }

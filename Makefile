@@ -2,6 +2,7 @@ SRCDIR	= ./srcs/
 SRCNAME	=	main.c\
 			pipe.c\
 			execve.c\
+			execve_search.c\
 			command.c\
 			status.c\
 			ft_close.c\
@@ -9,6 +10,7 @@ SRCNAME	=	main.c\
 			utility1.c\
 			mini_libft1.c\
 			mini_libft2.c\
+			mini_libft3.c\
 			debug.c
 
 SRCS	= $(addprefix $(SRCDIR), $(SRCNAME))

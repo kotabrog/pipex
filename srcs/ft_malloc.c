@@ -26,3 +26,16 @@ int	ft_free(void *pointer)
 	*(void **)pointer = NULL;
 	return (SUCCESS);
 }
+
+int	ft_free_double_char(char ***pointer)
+{
+	char	**temp;
+
+	if (pointer == NULL)
+		return (SUCCESS);
+	temp = *pointer;
+	while (*temp)
+		free(*(temp++));
+	ft_free(pointer);
+	return (SUCCESS);
+}
