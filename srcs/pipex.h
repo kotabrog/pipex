@@ -6,7 +6,7 @@
 /*   By: ksuzuki <ksuzuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 22:40:26 by ksuzuki           #+#    #+#             */
-/*   Updated: 2021/07/07 23:50:33 by ksuzuki          ###   ########.fr       */
+/*   Updated: 2021/07/08 18:38:11 by ksuzuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,14 @@ int		ft_malloc(void *pointer, size_t type_size, size_t n);
 int		ft_free(void *pointer);
 
 int		ft_strcmp(const char *s1, const char *s2);
+void	ft_strcpy(char *p, const char *s, size_t n);
+char	*ft_strndup(const char *s, ssize_t n);
 
 size_t	ft_strlen(const char *c);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_strdup(const char *s);
+char	**ft_split(const char *s, char c);
 
 void	debug_status(t_status *status);
 

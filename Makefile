@@ -8,6 +8,7 @@ SRCNAME	=	main.c\
 			ft_malloc.c\
 			utility1.c\
 			mini_libft1.c\
+			mini_libft2.c\
 			debug.c
 
 SRCS	= $(addprefix $(SRCDIR), $(SRCNAME))
