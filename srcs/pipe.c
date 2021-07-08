@@ -6,7 +6,7 @@
 /*   By: ksuzuki <ksuzuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 13:58:26 by ksuzuki           #+#    #+#             */
-/*   Updated: 2021/07/08 00:30:05 by ksuzuki          ###   ########.fr       */
+/*   Updated: 2021/07/09 00:11:17 by ksuzuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,10 @@ static int	pipe_recursive(t_status *status, int cmd_num, int before_fd)
 		process_command(status, status->cmd[cmd_num], \
 						status->cmd[cmd_num + 1]);
 	}
+	multi_close(&(status->cmd[cmd_num]->pipefd[READ]), \
+		&(status->cmd[cmd_num]->pipefd[WRITE]), NULL, NULL);
 	if (status->cmd[cmd_num + 1])
 		return (pipe_recursive(status, cmd_num + 1, pipefd[READ]));
-	return (SUCCESS);
-}
-
-static int	pid_search_close(t_cmd **cmd, int pid)
-{
-	if ((*cmd)->pid == pid)
-	{
-		(*cmd)->pid = -1;
-		multi_close(&((*cmd)->pipefd[WRITE]), &((*(cmd + 1))->pipefd[READ]), \
-					NULL, NULL);
-		return (SUCCESS);
-	}
-	while (*(cmd + 1) && (*(cmd + 1))->pid != pid)
-		++cmd;
-	if (*(cmd + 1) == NULL)
-	{
-		ft_close(&((*cmd)->pipefd[WRITE]));
-		return (SUCCESS);
-	}
-	multi_close(&((*cmd)->pipefd[WRITE]), &((*(cmd + 1))->pipefd[READ]), \
-				&((*(cmd + 1))->pipefd[WRITE]), NULL);
-	++cmd;
-	(*cmd)->pid = -1;
-	if (*(cmd + 1))
-		ft_close(&((*(cmd + 1))->pipefd[READ]));
 	return (SUCCESS);
 }
 
@@ -76,8 +53,6 @@ int	process_pipe(t_status *status)
 		pid = wait(&wait_status);
 		if (pid == -1)
 			break ;
-		if (pid_search_close(status->cmd, pid))
-			flag = ERROR;
 	}
 	return (flag);
 }

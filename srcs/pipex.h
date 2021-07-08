@@ -6,7 +6,7 @@
 /*   By: ksuzuki <ksuzuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 22:40:26 by ksuzuki           #+#    #+#             */
-/*   Updated: 2021/07/08 20:22:44 by ksuzuki          ###   ########.fr       */
+/*   Updated: 2021/07/08 21:27:26 by ksuzuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <fcntl.h>
 
 # include <stdio.h>
 
@@ -26,6 +27,7 @@
 # define ERROR -1
 # define READ 0
 # define WRITE 1
+# define APPEND 2
 
 typedef struct s_cmd {
 	char	*cmd;
@@ -44,6 +46,7 @@ typedef struct s_status {
 int		process_pipe(t_status *status);
 void	process_command(t_status *status, t_cmd *cmd, t_cmd *next_cmd);
 int		search_execve(char **com, char **env);
+int		redirect(t_status *status, int read_or_write);
 
 int		status_init(int argc, char **argv, char ***env, t_status **status);
 int		status_free(t_status *status);

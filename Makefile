@@ -3,6 +3,7 @@ SRCNAME	=	main.c\
 			pipe.c\
 			execve.c\
 			execve_search.c\
+			redirect.c\
 			command.c\
 			status.c\
 			ft_close.c\
