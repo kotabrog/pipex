@@ -14,9 +14,9 @@
 
 static int	check_number_of_argment(int argc)
 {
-	if (argc < 5)
+	if (argc != 5)
 	{
-		ft_putendl_fd("At least four arguments must be specified.", 2);
+		ft_putendl_fd("The number of arguments should be four.", 2);
 		return (ERROR);
 	}
 	return (SUCCESS);

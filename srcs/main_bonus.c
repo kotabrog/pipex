@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksuzuki <ksuzuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/07 00:02:12 by ksuzuki           #+#    #+#             */
-/*   Updated: 2021/07/07 00:31:21 by ksuzuki          ###   ########.fr       */
+/*   Created: 2021/07/09 20:35:36 by ksuzuki           #+#    #+#             */
+/*   Updated: 2021/07/09 20:45:26 by ksuzuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	debug_status(t_status *status)
+static int	check_number_of_argment(int argc)
 {
-	t_cmd	**cmd;
-	char	**env;
+	if (argc < 5)
+	{
+		ft_putendl_fd("At least four arguments must be specified.", 2);
+		return (ERROR);
+	}
+	return (SUCCESS);
+}
 
-	printf("file1: %s\n", status->file1);
-	printf("file2: %s\n", status->file2);
-	printf("heredoc_flag: %d\n", status->heredoc_flag);
-	cmd = status->cmd;
-	env = status->env;
-	while (*cmd)
-		printf("cmd: %s\n", (*(cmd++))->cmd);
-	while (*env)
-		printf("env: %s\n", *(env++));
+int	main(int argc, char **argv, char **env)
+{
+	t_status	*status;
+
+	if (check_number_of_argment(argc))
+		return (ERROR);
+	if (status_init(argc, argv, &env, &status))
+		return (ERROR);
+	process_pipe(status);
+	status_free(status);
 }

@@ -30,8 +30,6 @@ static int	set_file(char *file, int to_fd)
 		fd = open(file, O_RDONLY);
 	else if (to_fd == WRITE)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	else if (to_fd == APPEND)
-		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (fd == -1)
 		return (redirect_error(file));
 	if (dup2(fd, !!to_fd) == -1)
@@ -42,11 +40,7 @@ static int	set_file(char *file, int to_fd)
 
 int	redirect(t_status *status, int read_or_write)
 {
-	if (read_or_write == WRITE && status->heredoc_flag)
-		return (set_file(status->file2, APPEND));
-	else if (status->heredoc_flag)
-		return (SUCCESS);
-	else if (read_or_write == WRITE)
+	if (read_or_write == WRITE)
 		return (set_file(status->file2, WRITE));
 	else
 		return (set_file(status->file1, READ));

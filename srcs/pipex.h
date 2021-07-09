@@ -27,7 +27,6 @@
 # define ERROR -1
 # define READ 0
 # define WRITE 1
-# define APPEND 2
 
 typedef struct s_cmd {
 	char	*cmd;
@@ -38,7 +37,6 @@ typedef struct s_cmd {
 typedef struct s_status {
 	char	*file1;
 	char	*file2;
-	int		heredoc_flag;
 	t_cmd	**cmd;
 	char	**env;
 }			t_status;
@@ -72,7 +70,5 @@ char	*ft_strdup(const char *s);
 char	*ft_strjoin(const char *s1, const char *s2);
 char	**ft_split(const char *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
-void	debug_status(t_status *status);
 
 #endif

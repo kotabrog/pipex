@@ -12,16 +12,16 @@
 
 #include "pipex.h"
 
-static int	status_cmd_init(t_cmd ***cmd, int argc, char **argv, int flag)
+static int	status_cmd_init(t_cmd ***cmd, int argc, char **argv)
 {
 	int	i;
 
 	i = 0;
-	if (ft_malloc(cmd, sizeof(t_cmd *), argc - 2 - flag))
+	if (ft_malloc(cmd, sizeof(t_cmd *), argc - 2))
 		return (ERROR);
-	while (i < argc - 3 - flag)
+	while (i < argc - 3)
 	{
-		if (cmd_init(&(argv[i + flag + 2]), &((*cmd)[i])))
+		if (cmd_init(&(argv[i + 2]), &((*cmd)[i])))
 		{
 			cmd_free(cmd);
 			return (ERROR);
@@ -34,21 +34,12 @@ static int	status_cmd_init(t_cmd ***cmd, int argc, char **argv, int flag)
 
 int	status_init(int argc, char **argv, char ***env, t_status **status)
 {
-	int	flag;
-
-	flag = FALSE;
 	if (ft_malloc(status, sizeof(t_status), 1))
 		return (ERROR);
-	(*status)->heredoc_flag = FALSE;
-	if (ft_strcmp(argv[1], "here_doc") == 0)
-	{
-		flag = TRUE;
-		(*status)->heredoc_flag = TRUE;
-	}
-	(*status)->file1 = argv[1 + flag];
+	(*status)->file1 = argv[1];
 	(*status)->file2 = argv[argc - 1];
 	(*status)->env = *env;
-	if (status_cmd_init(&((*status)->cmd), argc, argv, flag))
+	if (status_cmd_init(&((*status)->cmd), argc, argv))
 	{
 		free(status);
 		return (ERROR);
