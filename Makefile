@@ -51,10 +51,10 @@ sani	:	$(OBJS)
 		$(CC) $(CFLAGS) -fsanitize=address $(OBJS) -o $(NAME)
 
 clean	:
-			$(RM) $(OBJS)
+			$(RM) $(OBJS) $(OBJSBONUS)
 
 fclean	:
-			$(RM) $(NAME) $(OBJS)
+			$(RM) $(NAME) $(OBJS) $(OBJSBONUS)
 
 re		: fclean all
 
