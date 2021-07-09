@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksuzuki <ksuzuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/06 22:41:37 by ksuzuki           #+#    #+#             */
-/*   Updated: 2021/07/09 18:00:56 by ksuzuki          ###   ########.fr       */
+/*   Created: 2021/07/09 20:59:41 by ksuzuki           #+#    #+#             */
+/*   Updated: 2021/07/09 20:59:41 by ksuzuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	check_number_of_argment(int argc)
 {
-	if (argc != 5)
+	if (argc < 5)
 	{
-		ft_putendl_fd("The number of arguments should be four.", 2);
+		ft_putendl_fd("At least four arguments must be specified.", 2);
 		return (ERROR);
 	}
 	return (SUCCESS);
