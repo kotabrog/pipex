@@ -6,7 +6,7 @@
 /*   By: ksuzuki <ksuzuki@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 22:41:37 by ksuzuki           #+#    #+#             */
-/*   Updated: 2021/07/07 23:49:09 by ksuzuki          ###   ########.fr       */
+/*   Updated: 2021/07/09 18:00:56 by ksuzuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char **argv, char **env)
 		return (ERROR);
 	if (status_init(argc, argv, &env, &status))
 		return (ERROR);
-	// debug_status(status);
 	process_pipe(status);
 	status_free(status);
 }
